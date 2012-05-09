@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'highline/import'
+
+
 class Basket
   attr_reader :goods
  
@@ -6,8 +10,8 @@ class Basket
   end
 
   def display num
-  
-      puts "\t编号\t商品名称\t单价\t数量\t总价"
+      say("<%= color('\t编号\t商品名称\t单价\t数量\t总价\n', :RED,:BOLD) %> ")
+   
 	 @goods.each do |item|
  		if(item.id=='147')
                    num=num.to_i-num.to_i/3 
@@ -17,10 +21,11 @@ class Basket
 
       @goods.each do |item|
  		if(item.name.length==6||item.name.length==9)
-                      puts "\t#{item.id}\t #{item.name}\t\t #{item.price}\t #{num}\t#{item.price.to_f*num.to_f}"
-                    
-                 else                    
-                      puts "\t#{item.id}\t #{item.name}\t #{item.price}\t #{num}\t#{item.price.to_f*num.to_f}"
+                   say("<%= color('\t#{item.id}\t #{item.name}\t\t #{item.price}\t #{num}\t#{item.price.to_f*num.to_f}\n', :magenta,:BOLD) %> ")
+                   
+                 else   
+                   say("<%= color('\t#{item.id}\t #{item.name}\t #{item.price}\t #{num}\t#{item.price.to_f*num.to_f}\n', :magenta,:BOLD) %> ")
+
                  end
         
      end
