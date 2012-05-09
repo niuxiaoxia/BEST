@@ -15,7 +15,7 @@ module Login
 	      puts "\t\t\t密码输入正确！"
 	      say("<%= color('-'*60, :RED,:bold) %>")
 	    end
-	 say("<%= color('-'*60, :RED,:bold) %>")
+		 say("<%= color('-'*60, :RED,:bold) %>")
 end
 
 include Login
@@ -24,9 +24,10 @@ include Login
 #界面信息友好提示
 	say("\n\n<%= color('\t\t\t欢迎光临BEST(百思特)便利店\n', :YELLOW,:BOLD) %> ")
     	say("\n\n<%= color('\t（本店实行购物满100打95折，火腿肠买2送1的活动！）\n', :GREEN,:BOLD) %> ")
-	
-	say("\n\n<%= color('\t\t\t回车键继续购物，q键退出\n', :blue,:BOLD) %> ")
-	
+	say("\n\n<%= color('\t\t\t回车键继续购物，q键退出\n', :RED,:BOLD) %> ")
+	t=Time.now
+    	say("\n<%= color('\t\t 本次购物时间为：#{t.strftime("%Y年%m月%d日  %H:%M:%S")} ', :YELLOW,:BOLD) %>")
+ 	say("\n\n<%= color('-'*60,  :RED,:bold) %>")
 	goods_list=[]
 	File.open("goods.txt").each_line do |line|
 	  goods_list << Goods.new(line)
@@ -36,12 +37,10 @@ basket = Basket.new
 str=gets
 
 while(str == "\n")
-	print "\t\t选择您所需要的物品："
-	input = gets.strip
+        input=ask("\t\<%= color('选择您所需要的物品:', :GREEN,:BOLD) %> " ) 
 	selected = goods_list.find {|item| item.id == input }
 	basket.goods << selected
-	print "\t\t选择您所购面的物品个数："
-	num = gets.strip
+	num=ask("\t<%= color('选择您所购面的物品个数：', :GREEN,:BOLD) %> " )     
 	say("\n\n\t\t\t\t<%= color('打印小票', :yellow,:bold) %>\n\n")
 	basket.display(num)
         total=basket.total(num)
@@ -58,7 +57,7 @@ end
  	shou=ask("\t\t\t\t\t<%= color('实收:', :RED,:BOLD) %> " ) 
    	printf("\t\t\t\t\t找零：%0.1f元\n", shou.to_f-total.to_f)
 
-end
+	end
 
   
     
